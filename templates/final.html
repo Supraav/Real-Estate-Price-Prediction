@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<style>
+    .navbar-text h1 {
+        color: #fff;
+        font-size: 40px;
+        align-content: center;
+    }
+
+    body {
+        background-color: grey;
+    }
+
+    form {
+        margin-top: 50px;
+        margin: auto;
+        width: 35%;
+    }
+
+    .result {
+        align-items: center;
+        margin: auto;
+        width: 35%;
+        border: 1px solid #ccc;
+        background-color: grey;
+        color: #fff;
+        padding: 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+    }
+</style>
+
+<head>
+    <title>House Price Prediction</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-dark">
+        <span class="navbar-text">
+            <h1>Price Predictor</h1>
+        </span>
+    </nav>
+
+    <form action="{{ url_for('predict') }}" method="post">
+        <div class="form-group">
+            <h1>Price Prediction System</h1>
+            <legend>Enter the variables</legend>
+            <br />
+            No of Bedrooms:<br />
+            <input name="bedrooms" type="number" class="form-control" required />
+            <br />
+
+            <br />
+            No of Bathrooms:<br />
+            <input name="bathroom" type="number" class="form-control" required />
+            <br />
+
+            <br />Total Landsize(in sq feet)<br />
+            <input name="landsize" type="number" class="form-control" required />
+            <br />
+
+            <br />Total Livingsize(in sq feet)<br />
+            <input name="livingsize" type="number" class="form-control" required />
+            <br />
+
+            <br />Has underground<br />
+            <select name="underground" id="underground" class="form-control" type="number" required="required">
+                <option selected>Choose Below</option>
+                <option value="0">yes</option>
+                <option value="1">no</option>
+            </select>
+            <br />
+
+            <br />Total Livingsize above underground(in sq feet)<br />
+            <input name="abovesize" type="number" class="form-control" type="number" required />
+            <br />
+
+            <br />
+            No of Floors:<br />
+            <input name="floors" type="number" class="form-control" required />
+            <br />
+
+            <br />View Rating ( ranges from 0 to 4 of how good the view should be
+            )<br />
+            <select name="view" id="view" class="form-control" required="required" type="number">
+                <option selected>Choose Below</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+
+            <br />Latitude<br />
+            <input name="latitude" type="range" id="latitude" min="0" max="100" class="form-control" required />
+            <div id="latitude_value"></div>
+            <br />
+
+            <br />Longitude<br />
+            <input name="longitude" id="longitude" type="range" min="0" max="100" class="form-control" required />
+            <div id="longitude_value"></div>
+            <br />
+
+            <!-- <br>Total Livingsize15(in sq feet)<br>
+            <input name="livingsize15" type="number" class="form-control" required>
+            <br> -->
+
+            <!-- <br>Total Landsize15(in sq feet)<br>
+            <input name="landsize15" type="number" class="form-control" required>
+            <br> -->
+
+            <!-- <br>houseage<br>
+            <input name="houseage" type="number" class="form-control" required> -->
+
+            
+
+            <br />Has been Renovated<br />
+            <select name="renovated" id="renovated" class="form-control" type="number" required="required">
+                <option selected>Choose Below</option>
+                <option value="0">yes</option>
+                <option value="1">no</option>
+            </select>
+            <br />
+
+            <div class="submit">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </div>
+    </form>
+
+    <br />
+
+    <div class="result">
+        {% if result %}
+        <h1>Predicted House Price:</h1>
+        <p style="font-size: 50px">${{ result }}</p>
+        {% endif %}
+    </div>
+
+    <script>
+        var slider1 = document.getElementById("latitude");
+        var output1 = document.getElementById("latitude_value");
+
+        var slider2 = document.getElementById("longitude");
+        var output2 = document.getElementById("longitude_value");
+
+        output1.innerHTML = slider1.value/100.0*(47.77760-47.15590)+47.15590;
+        output2.innerHTML = slider2.value/100.0*(-121.31500-(-122.51200))-122.51200;
+
+        slider1.oninput = function () {
+            output1.innerHTML = this.value/100.0*(47.77760-47.15590)+47.15590;
+        };
+
+        slider2.oninput = function () {
+            output2.innerHTML = this.value/100.0*(-121.31500-(-122.51200))-122.51200;
+            
+        };
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
