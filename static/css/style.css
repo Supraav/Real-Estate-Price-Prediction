@@ -1,0 +1,42 @@
+body {
+    background-color: black;
+    color: white;
+}
+
+.result {
+    align-content: center;
+    background-color: black;
+    color: white;
+}
+
+.navbar-brand {
+    color: #ffff;
+}
+
+.navbar-text h1 {
+    color: #fff;
+    font-size: 40px;
+    align-content: center;
+}
+
+body {
+    background-color: black
+}
+
+form {
+    margin-top: 50px;
+    margin: auto;
+    width: 35%;
+}
+
+.result {
+    align-items: center;
+    margin: auto;
+    width: 35%;
+    border: 1px solid #ccc;
+    background-color: grey;
+    color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+}

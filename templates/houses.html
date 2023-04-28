@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Real Estate Price Predicition</title>
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/b83e4b1b2b.js" crossorigin="anonymous"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Ubuntu&display=swap" rel="stylesheet">
+
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+    crossorigin="anonymous"></script>
+
+  <!-- jquery  -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <!-- cloudflare -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+
+
+<body>
+
+  <section class="colored-section" id="title">
+
+    <div class="container-fluid">
+
+      <!-- Nav Bar -->
+
+      <nav class="navbar navbar-expand-lg navbar-dark ">
+
+        <a class="navbar-brand" href="#">Real Estate Price Prediction</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse ms-auto" id="navbarSupportedContent">
+
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link actual-color" href="#abt">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link actual-color" href="#pricing">Prediction</a>
+            </li>
+          </ul>
+
+        </div>
+      </nav>
+
+
+      <!-- Title -->
+      <div class="row" id="abt">
+
+        <div class="col-lg-6">
+          <h1 class="big-heading">One Click Price Predict!</h1>
+          <button type="button" class="btn btn-dark btn-lg"><i class="fa-solid fa-magnifying-glass-location"></i><a
+              class="btn btn-dark btn-lg" href="#pricing">Predict Now</a></button>
+          <!-- <button type="button" class="btn btn-outline-light btn-lg download-button"><i class="fab fa-google-play"></i> Download</button> -->
+          <br><br>
+          <h4 class="desc">Let's search the property of your dreams.</h1>
+        </div>
+
+        <div class="col-lg-6">
+          <img class="title-image" src="{{ url_for('static', filename='images/mobilerep.png') }}" alt="house-mockup">s
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  </section>
+
+  <!-- Pricing -->
+
+  <section class="white-section" id="pricing">
+
+    <form action="{{ url_for('predict') }}" method="post">
+      <div class="form-group">
+        <h2 class="section-heading">Real Estate Price Prediction</h2>
+        <legend>Enter your desired amenitites.</legend>
+
+
+        <div class="container">
+          <div id="main">
+            <br />
+            No of Bedrooms:<br />
+            <input name="bedrooms" type="number" class="form-control" placeholder="Enter the No. of bedrooms you want"
+              required />
+            <br />
+
+            <br />
+            No of Bathrooms:<br />
+            <input name="bathroom" type="number" class="form-control" placeholder="Enter the No. of Bathrooms you want"
+              required />
+            <br />
+
+            <br />Total Landsize(in sq feet)<br />
+            <input name="landsize" type="number" class="form-control" placeholder="Enter your desired Land area"
+              required />
+            <br />
+
+            <br />Total Livingsize(in sq feet)<br />
+            <input name="livingsize" id="livingsize" type="number" class="form-control" placeholder="Enter your desired space required"
+              required />
+            <br />
+
+            <br />Has underground<br />
+            <select name="underground" id="underground" class="form-control" type="number" required="required">
+              <option selected>Choose Below</option>
+              <option value="1">yes</option>
+              <option value="0">no</option>
+            </select>
+            <br />
+
+            <br>Basement size </br>
+            <!-- <br />Total Livingsize above underground(in sq feet)<br /> -->
+            <input name="basementsize" id="basementsize" type="text" class="form-control"
+              placeholder="Enter your desired number in area" required />
+            <br />
+<!-- 
+            <br>Above size </br>
+             <br />Total Livingsize above underground(in sq feet)<br /> -->
+            <!-- <input name="abovesize" id="abovesize" type="number" class="form-control"
+              placeholder="Enter your desired number in area" required disabled/>
+            <br />  -->
+
+            <br />
+            No of Floors:<br />
+            <input name="floors" type="number" class="form-control" placeholder="Enter the No. of Floors you want"
+              required />
+            <br />
+
+            <br />View Rating ( range of how good the view should be
+            )<br />
+            <select name="view" id="view" class="form-control" required="required" type="number">
+              <option selected>Choose Below</option>
+              <option value="0">Poor</option>
+              <option value="1">Fair</option>
+              <option value="2">Good</option>
+              <option value="3">Very Good</option>
+              <option value="4">Excellent</option>
+            </select>
+            <!-- 
+            <br />Latitude<br />
+            <input name="latitude" type="range" id="latitude" min="0" max="100" class="form-control" required />
+            <div id="latitude_value"></div>
+            <br />
+
+            <br />Longitude<br />
+            <input name="longitude" id="longitude" type="range" min="0" max="100" class="form-control" required />
+            <div id="longitude_value"></div>
+            <br /> -->
+
+
+            <br />Has been Renovated<br />
+            <select name="renovated" id="renovated" class="form-control" type="number" required="required">
+              <option selected>Choose Below</option>
+              <option value="0">yes</option>
+              <option value="1">no</option>
+            </select>
+            <br />
+
+
+            <br />Select City<br />
+            <select name="city" id="city" class="form-control" required="required">
+              <option value="">Select Below</option>
+              <option value="Tukwila">Tukwila</option>
+              <option value="Seattle">Seattle</option>
+              <option value="Bothell">Bothell</option>
+              <option value="Redmond">Redmond</option>
+              <option value="Federal Way">Federal Way</option>
+              <option value="Maple_Valley">Maple Valley</option>
+              <option value="Bellevue">Bellevue</option>
+              <option value="Duvall">Duvall</option>
+              <option value="Shoreline">Shoreline</option>
+              <option value="Mercer_Island">Mercer Island</option>
+              <option value="Kent">Kent</option>
+              <option value="Issaquah">Issaquah</option>
+              <option value="Renton">Renton</option>
+              <option value="Vashon">Vashon</option>
+              <option value="Yarrow_Point">Yarrow Point</option>
+              <option value="Kirkland">Kirkland</option>
+              <option value="Black_Diamond">Black Diamond</option>
+              <option value="North_Bend">North Bend</option>
+              <option value="Snoqualmie">Snoqualmie</option>
+              <option value="Enumclaw">Enumclaw</option>
+              <option value="Fall_City">Fall City</option>
+              <option value="Woodinville">Woodinville</option>
+              <option value="Carnation">Carnation</option>
+              <option value="Medina">Medina</option>
+
+            </select>
+            <br />
+
+
+            <!-- ['Tukwila', 'Seattle', 'Bothell', 'Redmond', 'Federal Way',
+                  'Maple Valley', 'Bellevue', 'Duvall', 'Auburn', 'Shoreline',
+                  'Mercer Island', 'Kent', 'Issaquah', 'Renton', 'Vashon',
+                  'Yarrow Point', 'Kirkland', 'Black Diamond', 'North Bend', nan,
+                  'Snoqualmie', 'Enumclaw', 'Fall City', 'Woodinville', 'Carnation',
+                  'Medina'] -->
+
+            <div class="submit">
+              <input type="submit" value="Submit" class="btn btn-primary sub-size" /><br><br>
+            </div>
+          </div>
+    </form>
+
+
+
+    </form>
+    </div>
+
+    <div class="result">
+      {% if result %}
+      <h1>Predicted House Price:</h1>
+      <p class="price" style="font-size: 50px">${{ result }}</p>
+      {% endif %}
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+
+  <footer class="white-section" id="footer">
+
+    <i class="bot-icon fab fa-twitter transparency"></i>
+    <i class="bot-icon fab fa-facebook-f"></i>
+    <i class="bot-icon fab fa-instagram"></i>
+    <i class="bot-icon fas fa-envelope"></i>
+
+    <p class="footer-col">© Copyright 2023 Real Estate Price Prediciton</p>
+
+  </footer>
+
+  <script>
+ 
+  </script>
+
+<script src="{{url_for('static', filename='js/index.js')}}"></script>
+</body>
+
+</html>
