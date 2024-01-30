@@ -25,7 +25,7 @@ This repository contains all the associated work that has been done for the area
     flask run
     Default it runs on : [http://127.0.0.1:5000]
 
-
+### Screenshots:
 
 ![image](https://github.com/Supraav/Real-Estate-Price-Prediction/assets/47569979/58568a18-e3ad-4cf0-90a9-370cd6e5ead6)
 
