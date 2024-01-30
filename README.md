@@ -14,15 +14,18 @@ This repository contains all the associated work that has been done for the area
     3) generated and saved the model as a pickle file
     4) loaded the model from flask and rendered to the browser using Flask framework
 
-### Start
+### virtual environment
 
-    install the requirements file
+    python -m venv env
 
-    pip install requirements.txt
+### requirements file
+
+    pip install -r requirements.txt
 
 ### command
 
     flask run
+    
     Default it runs on : [http://127.0.0.1:5000]
 
 ### Screenshots:
