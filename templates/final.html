@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>House Price Prediction</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+
+    
+
+    <script>console.log('hello');</script>
+
+         <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+         crossorigin="anonymous"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+         crossorigin="anonymous"></script>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+         crossorigin="anonymous"></script> -->
+
+    <!-- <script type="text/javascript">
+            alert('hello');
+            console.log('hello');
+            const livingsize=document.getElementById("livingsize");
+            const option=document.getElementById("underground");
+            const abovesize=document.getElementById("abovesize");
+            console.log(option);
+            option.addEventListener("change", function(){
+            console.log('abv');
+            if (option.value === "0"){
+                livingsize.value=abovesize.value;
+            }
+            });
+
+    </script> -->
+
+</head>
+
+<body>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
+    
+    <nav class="navbar navbar-light bg-dark">
+        <span class="navbar-text">
+            <h1>Price Predictor</h1>
+        </span>
+    </nav>
+
+    <form action="{{ url_for('predict') }}" method="post">
+        <div class="form-group">
+            <h1>Price Prediction System</h1>
+            <legend>Enter the variables</legend>
+            <br />
+
+
+            No of Bedrooms:<br />
+            <input name="bedrooms" type="number" class="form-control" required />
+            <br />
+
+            <br />
+            No of Bathrooms:<br />
+            <input name="bathroom" type="number" class="form-control" required />
+            <br />
+
+            <br />Total Landsize(in sq feet)<br />
+            <input name="landsize" type="number" class="form-control" required />
+            <br />
+
+            <br />Total Livingsize(in sq feet)<br />
+            <input name="livingsize" type="number" class="form-control" required />
+            <br />
+
+            <br />Has underground<br />
+            <select name="underground" id="underground" class="form-control" type="number" required="required">
+                <option selected>Choose Below</option>
+                <option value="0">yes</option>
+                <option value="1">no</option>
+            </select>
+            <br />
+
+            <br />size below underground(in sq feet)<br />
+            <input name="abovesize" type="number" class="form-control" type="number" required />
+            <br />
+
+            <br />
+            No of Floors:<br />
+            <input name="floors" type="number" class="form-control" required />
+            <br />
+
+            <br />View Rating ( range of how good the view should be
+            )<br />
+            <select name="view" id="view" class="form-control" required="required" type="number">
+                <option selected>Choose Below</option>
+                <option value="0">Poor</option>
+                <option value="1">Fair</option>
+                <option value="2">Good</option>
+                <option value="3">Very Good</option>
+                <option value="4">Excellent</option>
+            </select>
+<!-- 
+            <br />Latitude<br />
+            <input name="latitude" type="range" id="latitude" min="0" max="100" class="form-control" required />
+            <div id="latitude_value"></div>
+            <br />
+
+            <br />Longitude<br />
+            <input name="longitude" id="longitude" type="range" min="0" max="100" class="form-control" required />
+            <div id="longitude_value"></div>
+            <br /> -->
+            
+
+            <br />Has been Renovated<br />
+            <select name="renovated" id="renovated" class="form-control" type="number" required="required">
+                <option selected>Choose Below</option>
+                <option value="0">yes</option>
+                <option value="1">no</option>
+            </select>
+            <br />
+
+
+            <br />Select City<br />
+            <select name="city" id="city" class="form-control"required="required">
+                <option value="Tukwila">Tukwila</option>
+                <option value="Seattle">Seattle</option>
+                <option value="Bothell">Bothell</option>
+                <option value="Redmond">Redmond</option>
+                <option value="Federal Way">Federal Way</option>
+                <option value="Maple_Valley">Maple Valley</option>
+                <option value="Bellevue">Bellevue</option>
+                <option value="Duvall">Duvall</option>
+                <option value="Shoreline">Shoreline</option>
+                <option value="Mercer_Island">Mercer Island</option>
+                <option value="Kent">Kent</option>
+                <option value="Issaquah">Issaquah</option>
+                <option value="Renton">Renton</option>
+                <option value="Vashon">Vashon</option>
+                <option value="Yarrow Point">Yarrow Point</option>
+                <option value="Kirkland">Kirkland</option>
+                <option value="Black_Diamond">Black Diamond</option>
+                <option value="North_Bend">North Bend</option>
+                <option value="Snoqualmie">Snoqualmie</option>
+                <option value="Enumclaw">Enumclaw</option>
+                <option value="Fall_City">Fall City</option>
+                <option value="Woodinville">Woodinville</option>
+                <option value="Carnation">Carnation</option>
+                <option value="Medina">Medina</option>
+
+            </select>
+            <br />
+
+
+            <!-- ['Tukwila', 'Seattle', 'Bothell', 'Redmond', 'Federal Way',
+       'Maple Valley', 'Bellevue', 'Duvall', 'Auburn', 'Shoreline',
+       'Mercer Island', 'Kent', 'Issaquah', 'Renton', 'Vashon',
+       'Yarrow Point', 'Kirkland', 'Black Diamond', 'North Bend', nan,
+       'Snoqualmie', 'Enumclaw', 'Fall City', 'Woodinville', 'Carnation',
+       'Medina'] -->
+
+            <div class="submit">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </div>
+    </form>
+
+    <br />
+
+    <div class="result">
+        {% if result %}
+        <h1>Predicted House Price:</h1>
+        <p style="font-size: 50px">${{ result }}</p>
+        {% endif %}
+    </div>
+
+    
+
+
+</body>
+
+</html>
